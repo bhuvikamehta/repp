@@ -1,0 +1,5 @@
+{
+  "name": "AI Reporting Agent",
+  "description": "A production-grade agentic workflow for summarizing documents and generating fact-grounded reports with structured JSON outputs and database logging simulation.",
+  "requestFramePermissions": []
+}

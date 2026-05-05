@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: ai-reporting-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.13
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: LANGGRAPH_CHECKPOINT_PATH
+        value: "/var/data/backend_checkpoints.sqlite"
+    disk:
+      name: backend-data
+      mountPath: /var/data
+      sizeGB: 1
+
+  - type: web
+    name: ai-reporting-frontend
+    env: static
+    rootDir: .
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: ai-reporting-backend
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL
