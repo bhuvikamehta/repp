@@ -13,7 +13,7 @@ services:
         sync: false
       - key: SUPABASE_KEY
         sync: false
-      - key: GEMINI_API_KEY
+      - key: COHERE_API_KEY
         sync: false
       - key: LANGGRAPH_CHECKPOINT_PATH
         value: "backend_checkpoints.sqlite"
@@ -30,3 +30,9 @@ services:
           name: ai-reporting-backend
           type: web
           envVarKey: RENDER_EXTERNAL_URL
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
