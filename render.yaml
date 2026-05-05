@@ -2,6 +2,7 @@ services:
   - type: web
     name: ai-reporting-backend
     env: python
+    plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
@@ -15,11 +16,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: LANGGRAPH_CHECKPOINT_PATH
-        value: "/var/data/backend_checkpoints.sqlite"
-    disk:
-      name: backend-data
-      mountPath: /var/data
-      sizeGB: 1
+        value: "backend_checkpoints.sqlite"
 
   - type: web
     name: ai-reporting-frontend
